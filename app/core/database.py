@@ -1,12 +1,20 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
+import os
 
-# Database URL
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:Frilancer2005@localhost:3306/kindly"
 
-# Create the engine
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the DATABASE_URL from the environment
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+
+
+engine = create_engine(DATABASE_URL)
+
 
 # Create a configured session class
 SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
@@ -21,4 +29,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+
 

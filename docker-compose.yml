@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: Frilancer2005
+      MYSQL_DATABASE: kindly
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Frilancer2005
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:Frilancer2005@db:3306/kindly
+    volumes:
+      - .:/app
+
+volumes:
+  mysql_data:
