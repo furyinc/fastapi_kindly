@@ -47,7 +47,6 @@ This starts the backend and MySQL database.
 ## 🛠️ Contributing
 Feel free to contribute by creating a pull request!
 
-## 🔒 License
 ## 📜 License
 This project is licensed under the [MIT License](LICENSE.txt).
 
